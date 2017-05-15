@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver">
+		</property>
+		<property name="url" value="jdbc:mysql://localhost:3306/pstu_evaluate1">
+		</property>
+		<property name="username" value="root"></property>
+		<property name="password" value="123456"></property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+			</props>
+		</property>
+
+		<property name="mappingResources">
+			<list>
+				<value>com/ld/model/RankNum.hbm.xml</value>
+				<value>com/ld/model/Ban.hbm.xml</value>
+				<value>com/ld/model/Manager.hbm.xml</value>
+				<value>com/ld/model/ItemType.hbm.xml</value>
+				<value>com/ld/model/Zhuan.hbm.xml</value>
+				<value>com/ld/model/Yuan.hbm.xml</value>
+				<value>com/ld/model/Student.hbm.xml</value>
+				<value>com/ld/model/StuItem.hbm.xml</value>
+				<value>com/ld/model/Item.hbm.xml</value></list>
+		</property></bean>
+	
+	<bean id="ht" class="org.springframework.orm.hibernate3.HibernateTemplate"
+		>
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 用户登录 -->
+	<bean id="userService" class="com.ld.service.impl.UserServiceImpl">
+		<property name="ht" ref="ht" ></property>
+	</bean>
+	
+	<bean id="loginAction" class="com.ld.action.LoginAction" scope="prototype">
+		<property name="userService" ref="userService"></property>
+	</bean>
+	<!-- 学生 -->
+	<bean id="studentService" class="com.ld.service.impl.StudentServiceImpl">
+		<property name="ht" ref="ht" ></property>
+	</bean>	
+	<bean id="studentAction" class="com.ld.action.StudentAction" scope="prototype">
+		<property name="studentService" ref="studentService"></property>
+	</bean>
+	<!-- 贫困指标表显示 -->
+	<bean id="poorItemService" class="com.ld.service.impl.PoorItemServiceImpl">
+		<property name="ht" ref="ht" ></property>
+	</bean>
+	
+	<bean id="poorItemAction" class="com.ld.action.PoorItemAction" scope="prototype">
+		<property name="poorItemService" ref="poorItemService"></property>
+	</bean>
+	<!-- 学生贫困指标 -->
+	<bean id="stuItemItemService" class="com.ld.service.impl.StuItemServiceImpl">
+		<property name="ht" ref="ht" ></property>
+	</bean>
+	
+	<bean id="poorJoinAction" class="com.ld.action.PoorJoinAction" scope="prototype">
+		<property name="poorItemService" ref="poorItemService"></property>
+		<property name="stuItemService" ref="stuItemItemService"></property>
+	</bean>
+	<!-- 教师贫困指标管理 -->
+	<bean id="trPoorItemAction" class="com.ld.action.TrPoorItemAcion" scope="prototype">
+		<property name="poorItemService" ref="poorItemService"></property>
+	</bean>
+	<!-- 教师贫困生管理 -->
+	 <bean id="stuShowTAction" class="com.ld.action.StuShowTAction" scope="prototype">
+		<property name="studentService" ref="studentService"></property>
+	</bean> 
+	
+	<bean id="evaluateStuAction" class="com.ld.action.EvaluateStuAction" scope="prototype">
+		<property name="poorItemService" ref="poorItemService"></property>	
+		<property name="stuItemService" ref="stuItemItemService"></property>
+	</bean> 
+</beans>

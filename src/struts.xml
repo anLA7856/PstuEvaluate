@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <constant name="objectFactory" value="spring">
+    </constant>
+  <package name="userManage" extends="struts-default" namespace="/" >
+        <action name="loginAction" class="com.ld.action.LoginAction">
+              <result name="error">/index.jsp</result>
+              <result name="manager2">/manager.jsp</result>
+              <result name="manager1">/teacher.jsp</result>
+              <result name="successStudent">/student.jsp</result>
+        </action>
+        <action name="studentAction" class="com.ld.action.StudentAction" method="getAllStudent">
+              <result name="success">/studentManager.jsp</result>
+        </action>
+        <action name="poorItemAction" class="com.ld.action.PoorItemAction" method="getAllPoorItem">
+              <result name="success">/poorJoin.jsp</result>
+        </action>
+        <action name="poorJoinAction" class="com.ld.action.PoorJoinAction" method="addStuItem">
+              <result name="success">/welcome.jsp</result>
+        </action>
+        <action name="trPoorItemAction" class="com.ld.action.TrPoorItemAcion" method="trPoorItem">
+              <result name="success">/poorItemManager.jsp</result>
+        </action>
+        <action name="stuShowTAction" class="com.ld.action.StuShowTAction" method="getAllStudent">
+              <result name="success">/stuShowT.jsp</result>
+        </action>
+        <action name="evaluateStuAction" class="com.ld.action.EvaluateStuAction" method="evaluateStu">
+              <result name="success">/showStudentItem.jsp</result>
+        </action>
+   </package>
+
+</struts>    
