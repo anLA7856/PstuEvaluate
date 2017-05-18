@@ -13,19 +13,26 @@
         <action name="studentAction" class="com.ld.action.StudentAction" method="getAllStudent">
               <result name="success">/studentManager.jsp</result>
         </action>
+         <!-- 显示学生填写贫困信息 -->
         <action name="poorItemAction" class="com.ld.action.PoorItemAction" method="getAllPoorItem">
               <result name="success">/poorJoin.jsp</result>
         </action>
         <action name="poorJoinAction" class="com.ld.action.PoorJoinAction" method="addStuItem">
               <result name="success">/welcome.jsp</result>
         </action>
+         <!-- 教师显示贫困指标信息 -->
         <action name="trPoorItemAction" class="com.ld.action.TrPoorItemAcion" method="trPoorItem">
               <result name="success">/poorItemManager.jsp</result>
         </action>
+         <!-- 显示所有学生信息 -->
         <action name="stuShowTAction" class="com.ld.action.StuShowTAction" method="getAllStudent">
               <result name="success">/stuShowT.jsp</result>
         </action>
+        <!-- 显示学生贫困信息 -->
         <action name="evaluateStuAction" class="com.ld.action.EvaluateStuAction" method="evaluateStu">
+              <result name="success">/showStudentItem.jsp</result>
+        </action>
+        <action name="evaluateGradeAction" class="com.ld.action.EvaluateGradeAction" method="evaluateGrade">
               <result name="success">/showStudentItem.jsp</result>
         </action>
    </package>

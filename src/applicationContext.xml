@@ -11,7 +11,7 @@
 		<property name="url" value="jdbc:mysql://localhost:3306/pstu_evaluate1">
 		</property>
 		<property name="username" value="root"></property>
-		<property name="password" value="123456"></property>
+		<property name="password" value="root"></property>
 	</bean>
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
@@ -36,56 +36,73 @@
 				<value>com/ld/model/Yuan.hbm.xml</value>
 				<value>com/ld/model/Student.hbm.xml</value>
 				<value>com/ld/model/StuItem.hbm.xml</value>
-				<value>com/ld/model/Item.hbm.xml</value></list>
-		</property></bean>
-	
-	<bean id="ht" class="org.springframework.orm.hibernate3.HibernateTemplate"
-		>
+				<value>com/ld/model/Item.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="ht" class="org.springframework.orm.hibernate3.HibernateTemplate">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	<!-- 用户登录 -->
 	<bean id="userService" class="com.ld.service.impl.UserServiceImpl">
-		<property name="ht" ref="ht" ></property>
+		<property name="ht" ref="ht"></property>
 	</bean>
-	
 	<bean id="loginAction" class="com.ld.action.LoginAction" scope="prototype">
 		<property name="userService" ref="userService"></property>
 	</bean>
 	<!-- 学生 -->
 	<bean id="studentService" class="com.ld.service.impl.StudentServiceImpl">
-		<property name="ht" ref="ht" ></property>
-	</bean>	
-	<bean id="studentAction" class="com.ld.action.StudentAction" scope="prototype">
+		<property name="ht" ref="ht"></property>
+	</bean>
+	<bean id="studentAction" class="com.ld.action.StudentAction"
+		scope="prototype">
 		<property name="studentService" ref="studentService"></property>
 	</bean>
 	<!-- 贫困指标表显示 -->
 	<bean id="poorItemService" class="com.ld.service.impl.PoorItemServiceImpl">
-		<property name="ht" ref="ht" ></property>
+		<property name="ht" ref="ht"></property>
 	</bean>
-	
-	<bean id="poorItemAction" class="com.ld.action.PoorItemAction" scope="prototype">
+
+	<bean id="poorItemAction" class="com.ld.action.PoorItemAction"
+		scope="prototype">
 		<property name="poorItemService" ref="poorItemService"></property>
 	</bean>
 	<!-- 学生贫困指标 -->
-	<bean id="stuItemItemService" class="com.ld.service.impl.StuItemServiceImpl">
-		<property name="ht" ref="ht" ></property>
+	<bean id="stuItemService" class="com.ld.service.impl.StuItemServiceImpl">
+		<property name="ht" ref="ht"></property>
 	</bean>
-	
-	<bean id="poorJoinAction" class="com.ld.action.PoorJoinAction" scope="prototype">
+
+	<bean id="poorJoinAction" class="com.ld.action.PoorJoinAction"
+		scope="prototype" autowire="byName">
 		<property name="poorItemService" ref="poorItemService"></property>
-		<property name="stuItemService" ref="stuItemItemService"></property>
+		<property name="stuItemService" ref="stuItemService"></property>
 	</bean>
 	<!-- 教师贫困指标管理 -->
-	<bean id="trPoorItemAction" class="com.ld.action.TrPoorItemAcion" scope="prototype">
+	<bean id="trPoorItemAction" class="com.ld.action.TrPoorItemAcion"
+		scope="prototype">
 		<property name="poorItemService" ref="poorItemService"></property>
 	</bean>
 	<!-- 教师贫困生管理 -->
-	 <bean id="stuShowTAction" class="com.ld.action.StuShowTAction" scope="prototype">
+	<bean id="stuShowTAction" class="com.ld.action.StuShowTAction"
+		scope="prototype">
 		<property name="studentService" ref="studentService"></property>
-	</bean> 
-	
-	<bean id="evaluateStuAction" class="com.ld.action.EvaluateStuAction" scope="prototype">
-		<property name="poorItemService" ref="poorItemService"></property>	
-		<property name="stuItemService" ref="stuItemItemService"></property>
-	</bean> 
+	</bean>
+	<!-- 教师评定 -->
+	<bean id="evaluateStuAction" class="com.ld.action.EvaluateStuAction"
+		scope="prototype" autowire="byName">
+		<property name="poorItemService" ref="poorItemService"></property>
+		<property name="stuItemService" ref="stuItemService"></property>
+	</bean>
+	<bean id="evaluateGradeAction" class="com.ld.action.EvaluateGradeAction"
+		scope="prototype" autowire="byName">
+		<property name="poorItemService" ref="poorItemService"></property>
+		<property name="stuItemService" ref="stuItemService"></property>
+		<property name="studentService" ref="studentService"></property>
+		<property name="itemService" ref="itemService"></property>
+	</bean>
+    <!-- 贫困指标权重 -->
+    <bean id="itemService" class="com.ld.service.impl.ItemServiceImpl">
+        <property name="ht" ref="ht"></property>
+    </bean>
 </beans>

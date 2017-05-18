@@ -31,7 +31,7 @@
         <property name="SPhone" type="java.lang.String">
             <column name="s_phone" length="20" />
         </property>
-        <property name="SGrade" type="java.lang.Integer">
+        <property name="SGrade" type="java.lang.Float">
             <column name="s_grade" />
         </property>
         <property name="SRank" type="java.lang.Integer">

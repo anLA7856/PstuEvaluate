@@ -24,4 +24,12 @@ public class StudentServiceImpl implements StudentService {
 		return studentList;
 	}
 
+	public void updateGrade(int id , float grade) {
+		StringBuffer sql = new StringBuffer("update Student set SGrade =");
+		sql.append(grade+" where id =");
+		sql.append(id);
+		//ht.find(sql.toString());
+		ht.bulkUpdate(sql.toString());		
+	}
+
 }

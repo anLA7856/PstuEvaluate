@@ -25,12 +25,12 @@ public class PoorItemServiceImpl implements PoorItemService{
 		return itemTypeList;
 	}
 
-	public List<ItemType> getItem(int z_id) {
+	public ItemType getItem(int z_id) {
 		String sql = "from ItemType where id = ";
 		sql = sql + z_id;
 		@SuppressWarnings("unchecked")
-		List<ItemType> itemTypeList = ht.find(sql);
-		return itemTypeList;
+		ItemType itemType = (ItemType) ht.find(sql).get(0);
+		return itemType;
 	}
 
 }

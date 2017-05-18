@@ -16,7 +16,7 @@ public class Student implements java.io.Serializable {
 	private Integer SZhuan;
 	private Integer SBan;
 	private String SPhone;
-	private Integer SGrade;
+	private Float SGrade;
 	private Integer SRank;
 
 	// Constructors
@@ -27,7 +27,7 @@ public class Student implements java.io.Serializable {
 
 	/** full constructor */
 	public Student(String SId, String SPassword, String SName, Integer SYuan,
-			Integer SZhuan, Integer SBan, String SPhone, Integer SGrade,
+			Integer SZhuan, Integer SBan, String SPhone, Float SGrade,
 			Integer SRank) {
 		this.SId = SId;
 		this.SPassword = SPassword;
@@ -106,12 +106,12 @@ public class Student implements java.io.Serializable {
 		this.SPhone = SPhone;
 	}
 
-	public Integer getSGrade() {
-		return this.SGrade;
+	public Float getSGrade() {
+		return SGrade;
 	}
 
-	public void setSGrade(Integer SGrade) {
-		this.SGrade = SGrade;
+	public void setSGrade(Float sGrade) {
+		SGrade = sGrade;
 	}
 
 	public Integer getSRank() {
